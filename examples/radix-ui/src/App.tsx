@@ -10,6 +10,7 @@ import { CheckIcon } from '@radix-ui/react-icons';
 
 interface Schema {
 	accept: boolean;
+	color: string;
 }
 
 export default function Example() {
@@ -37,19 +38,7 @@ export default function Example() {
 
 						<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 							<div className="sm:col-span-6">
-								<div className="flex items-center gap-2 w-full">
-									<Checkbox.Root
-										{...fieldset.accept}
-										className="border border-gray-300 flex h-[20px] w-[20px] appearance-none items-center justify-center rounded-[4px] bg-white outline-none focus:ring-2 focus:ring-offset focus:ring-violet11"
-									>
-										<Checkbox.Indicator className="text-violet11">
-											<CheckIcon />
-										</Checkbox.Indicator>
-									</Checkbox.Root>
-									<label className="block text-sm font-medium text-gray-700">
-										Accept (Checkbox)
-									</label>
-								</div>
+								<ExampleCheckbox {...fieldset.accept} required />
 								<p className="mt-2 text-sm text-red-500">
 									{fieldset.accept.error}
 								</p>
@@ -59,5 +48,23 @@ export default function Example() {
 				</div>
 			</form>
 		</main>
+	);
+}
+
+function ExampleCheckbox(config: FieldConfig<boolean>) {
+	return (
+		<div className="flex items-center gap-2 w-full">
+			<Checkbox.Root
+				{...config}
+				className="border border-gray-300 flex h-[20px] w-[20px] appearance-none items-center justify-center rounded-[4px] bg-white outline-none focus:ring-2 focus:ring-offset focus:ring-violet11"
+			>
+				<Checkbox.Indicator className="text-violet11">
+					<CheckIcon />
+				</Checkbox.Indicator>
+			</Checkbox.Root>
+			<label className="block text-sm font-medium text-gray-700">
+				Accept (Checkbox)
+			</label>
+		</div>
 	);
 }
